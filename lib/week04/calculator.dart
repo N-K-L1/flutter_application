@@ -46,8 +46,11 @@ class _CalculatorState extends State<Calculator> {
       } else {
         int num1 = int.tryParse(tcNum1.text) ?? 0;
         int num2 = int.tryParse(tcNum2.text) ?? 0;
-        int mul = num1 * num2;
-        message = 'Result =  $mul';
+        int pow = 1;
+        for (int i = 0; i < num2; i++) {
+          pow = pow * num1;
+        }
+        message = 'Result =  $pow';
       }
     });
   }
