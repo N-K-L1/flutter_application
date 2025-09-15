@@ -56,7 +56,7 @@ class _SumState extends State<Sum> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 120,
+                width: 130,
                 child: TextField(
                   controller: tcNum1,
                   decoration: InputDecoration(hintText: 'First Number'),
@@ -66,7 +66,7 @@ class _SumState extends State<Sum> {
               const Text('+'),
               const SizedBox(width: 8),
               SizedBox(
-                width: 120,
+                width: 130,
                 child: TextField(
                   controller: tcNum2,
                   decoration: InputDecoration(hintText: 'Second Number'),
