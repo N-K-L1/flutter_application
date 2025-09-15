@@ -44,7 +44,7 @@ class _SumState extends State<Sum> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Calculator',
+          'Sum Calculator',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: const Color.fromRGBO(40, 148, 236, 1),
@@ -59,7 +59,7 @@ class _SumState extends State<Sum> {
                 width: 120,
                 child: TextField(
                   controller: tcNum1,
-                  decoration: InputDecoration(hintText: 'Number 1'),
+                  decoration: InputDecoration(hintText: 'First Number'),
                 ),
               ),
               const SizedBox(width: 8),
@@ -69,7 +69,7 @@ class _SumState extends State<Sum> {
                 width: 120,
                 child: TextField(
                   controller: tcNum2,
-                  decoration: InputDecoration(hintText: 'Number 2'),
+                  decoration: InputDecoration(hintText: 'Second Number'),
                 ),
               ),
             ],
