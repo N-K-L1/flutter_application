@@ -11,9 +11,11 @@ class ClickFast extends StatefulWidget {
 class _ClickFastState extends State<ClickFast> {
   double count = 1.00; // start at 1.00
   Timer? timer;
+  int click = 0;
 
   void startTimer() {
-    timer?.cancel(); // prevent multiple timers
+    if (timer != null && timer!.isActive) return;
+
     timer = Timer.periodic(const Duration(milliseconds: 10), (t) {
       setState(() {
         count -= 0.01;
@@ -29,7 +31,16 @@ class _ClickFastState extends State<ClickFast> {
     timer?.cancel();
     setState(() {
       count = 1.00;
+      click = 0;
     });
+  }
+
+  void incrementClick() {
+    if (count > 0 && count != 1) {
+      setState(() {
+        click++;
+      });
+    }
   }
 
   @override
@@ -41,35 +52,27 @@ class _ClickFastState extends State<ClickFast> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 254, 247, 255),
       body: Center(
         child: Container(
           width: 250,
           padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: Colors.purple.shade100,
-            borderRadius: BorderRadius.circular(12),
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Counter
               Text(
                 count.toStringAsFixed(2),
-                style: const TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: const TextStyle(color: Colors.red),
               ),
+              Text('Click = $click', style: const TextStyle(fontSize: 40)),
               const SizedBox(height: 20),
-
-              // Buttons row
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple,
+                  FilledButton.icon(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: Colors.lightGreen,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
@@ -78,29 +81,33 @@ class _ClickFastState extends State<ClickFast> {
                         vertical: 12,
                       ),
                     ),
-                    onPressed: startTimer,
-                    icon: const Icon(Icons.play_arrow, color: Colors.white),
+                    onPressed: incrementClick,
+                    icon: const Icon(Icons.ads_click, color: Colors.white),
                     label: const Text(
-                      "Start",
+                      "Click",
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
+                  FilledButton.icon(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
+                        side: const BorderSide(color: Colors.black),
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 20,
                         vertical: 12,
                       ),
                     ),
-                    onPressed: resetTimer,
-                    icon: const Icon(Icons.refresh, color: Colors.white),
+                    onPressed: () {
+                      resetTimer();
+                      startTimer();
+                    },
+                    icon: const Icon(Icons.refresh, color: Colors.black),
                     label: const Text(
-                      "Reset",
-                      style: TextStyle(color: Colors.white),
+                      "Play",
+                      style: TextStyle(color: Colors.red),
                     ),
                   ),
                 ],
