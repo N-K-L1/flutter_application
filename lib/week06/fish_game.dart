@@ -28,6 +28,8 @@ class _FishGameState extends State<FishGame> {
 
   @override
   Widget build(BuildContext context) {
+    int? turn;
+    int? totalScore;
     return Scaffold(
       backgroundColor: Colors.blue[50],
       appBar: AppBar(
@@ -72,7 +74,7 @@ class _FishGameState extends State<FishGame> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
-                        Text("Turn: $turn / 3", style: const TextStyle(fontSize: 18)),
+            Text("Turn: $turn / 3", style: const TextStyle(fontSize: 18)),
             Text(
               "Total Score: $totalScore pts",
               style: const TextStyle(fontSize: 18),
